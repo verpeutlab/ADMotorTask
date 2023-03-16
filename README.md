@@ -1,1 +1,1 @@
-# simple-motor-task
+# fine-motor-task

@@ -1,12 +1,12 @@
 #include <Stepper.h>
 
 const int stepsPerRevolution = 516;  // change this to fit the number of steps per revolution for your stepper motor
-const int ledPin = 13;  // the pin that the trial indicator LED is attached to
-const int irPin = 2;  // the pin that the IR Phototransistor is attached to
+const int ledPin = 13;  // the pin that the trial start indicator LED (output) is attached to
+const int irPin = 2;  // the pin that the IR Phototransistor (input) is attached to
 unsigned long previousTime = 0;
-const unsigned long bufferTime = 30000; // 30 seconds buffer time between trials
+const unsigned long bufferTime = 30000; // 30 seconds buffer time between trials, edit this value to adjust buffer time
 
-// initialize the stepper library on pins 9 through 12:
+// initialize the stepper library on pins 9 through 12 (see schematic):
 Stepper myStepper(stepsPerRevolution, 9, 10, 11, 12);
 
 void setup() {
@@ -17,10 +17,12 @@ void setup() {
 
 void loop() {
   unsigned long currentTime = millis();
-  // read the state of the IR Phototransistor
+  // read the state of the input IR Phototransistor
   int irState = digitalRead(irPin);
 
   // check if there is any incoming serial data
+  // this serial loop allows for manual trial and program start, use for testing and troubleshooting 
+  // send 't' via serial monitor to activate
   if (Serial.available() > 0) {
     // read the incoming byte
     byte incomingByte = Serial.read();

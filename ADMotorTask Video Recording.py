@@ -2,14 +2,13 @@
 """
 Created on Tue Aug 22 15:11:50 2023
 
-@author: verpeutlab
+@author: verpeutlab, davidlukacik
 """
 
 import os
 import time
 import cv2
 from PySpin import PySpin
-import subprocess
 import serial
 
 # Set the save location for the videos
